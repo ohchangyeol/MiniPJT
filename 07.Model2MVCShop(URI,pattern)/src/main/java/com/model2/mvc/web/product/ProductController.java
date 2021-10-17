@@ -77,7 +77,7 @@ public class ProductController {
 		 return "forward:/product/addProduct.jsp"; 
 	 }
 	 //List Mapping
-	 @RequestMapping(value="listProduct", method=RequestMethod.GET) 
+	 @RequestMapping("listProduct") 
 	 public String listProduct( @ModelAttribute("search") Search search , Model model , HttpServletRequest request) throws Exception{
 	 
 		 System.out.println("/listProduct");

@@ -14,12 +14,6 @@ System.out.println("purchase = " + purchase);
 System.out.println("User = " + user);
 --%>
 
-
-
-
-
-
-
 <html>
 <head>
 <link rel="stylesheet" href="/css/admin.css" type="text/css">
@@ -33,7 +27,7 @@ System.out.println("User = " + user);
 
 <body bgcolor="#ffffff" text="#000000">
 
-<form name="updatePurchase" method="post"	action="/updatePurchase.do?tranNo=${purchase.tranNo}">
+<form name="updatePurchase" method="post"	action="/purchase/updatePurchase?tranNo=${purchase.tranNo}">
 
 <table width="100%" height="37" border="0" cellpadding="0" cellspacing="0">
 	<tr>
