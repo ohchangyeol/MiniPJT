@@ -47,7 +47,7 @@ function fncGetUserList(currentPage){
 
 <div style="width:98%; margin-left:10px;">
 
-<form name="detailForm" action="/listProduct.do?menu=${param.menu}" method="post">
+<form name="detailForm" action="/product/listProduct?menu=${param.menu}" method="post">
 
 <table width="100%" height="37" border="0" cellpadding="0"	cellspacing="0">
 	<tr>
@@ -162,7 +162,7 @@ function fncGetUserList(currentPage){
 			<c:if test="${param.menu == 'manage'}">
 				<c:choose>
 					<c:when test="${empty product.prodTranCode}">
-						<a href="/updateProductView.do?prodNo=${product.prodNo}">${product.prodName}</a>
+						<a href="/product/updateProduct?prodNo=${product.prodNo}">${product.prodName}</a>
 					</c:when>
 					<c:otherwise>
 						${product.prodName}
@@ -173,7 +173,7 @@ function fncGetUserList(currentPage){
 			<c:if test="${param.menu == 'search'}">
 				<c:choose>
 					<c:when test="${empty product.prodTranCode}">
-						<a href="/getProduct.do?prodNo=${product.prodNo}">${product.prodName}</a>
+						<a href="/product/getProduct?prodNo=${product.prodNo}">${product.prodName}</a>
 					</c:when>
 					<c:otherwise>
 						${product.prodName}
@@ -194,7 +194,7 @@ function fncGetUserList(currentPage){
 						판매중
 					</c:when>
 					<c:when test="${product.prodTranCode == '1  '}">
-						구매 완료  <a href="/updateTranCodeByProd.do?prodNo=${product.prodNo}&menu=${param.menu}" onclick="return confirm('선택 하신 상품 ${vo.prodName}을 배송 하시겠습니까?')">배송하기</a>
+						구매 완료  <a href="/purchase/updateTranCodeByProd?prodNo=${product.prodNo}&menu=${param.menu}" onclick="return confirm('선택 하신 상품 ${vo.prodName}을 배송 하시겠습니까?')">배송하기</a>
 					</c:when>
 					<c:when test="${product.prodTranCode == '2  '}">
 						배송중

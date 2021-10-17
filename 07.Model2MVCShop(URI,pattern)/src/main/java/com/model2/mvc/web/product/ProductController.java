@@ -15,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.model2.mvc.common.Page;
@@ -26,59 +27,62 @@ import com.model2.mvc.service.product.ProductService;
 
 //==> 회원관리 Controller
 @Controller
+@RequestMapping("/product/*")
 public class ProductController {
 	
 	///Field
 	@Autowired
 	@Qualifier("productServiceImpl")
 	private ProductService productService;
-	//setter Method 구현 않음
-		
-	public ProductController(){
-		System.out.println("@Controller :: "+this.getClass());
-	}
-	
-	//==> classpath:config/common.properties  ,  classpath:config/commonservice.xml 참조 할것
-	//==> 아래의 두개를 주석을 풀어 의미를 확인 할것
+
 	@Value("#{commonProperties['pageUnit']}")
-	//@Value("#{commonProperties['pageUnit'] ?: 3}")
 	int pageUnit;
 	
 	@Value("#{commonProperties['pageSize']}")
-	//@Value("#{commonProperties['pageSize'] ?: 2}")
-	int pageSize;
+	int pageSize;	
 	
 	
-	@RequestMapping("/addProductView.do")
+	// constructor
+	public ProductController(){
+		System.out.println("@Controller :: "+this.getClass());
+	}
+	/*
+	@RequestMapping("addProductView")
 	public String addProductView() throws Exception {
 		//layout에 이미 jsp 로 연결하도록 만들었기 때문에 언제 실행 될지 잘 모르겠음. 
-		System.out.println("/addProductView.do");
+		System.out.println("addProductView");
 		
 		return "redirect:/product/addProductView.jsp";
 	}
+	*/
 	
-	
-	 @RequestMapping("/addProduct.do") 
-	 public String addUser( @ModelAttribute("product") Product product ) throws Exception {
+	//Add Mapping
+	@RequestMapping(value="addProduct", method=RequestMethod.GET) 
+	 public String addProduct() throws Exception {
 		 
-		 System.out.println("/addProduct.do");
+		 System.out.println("addProduct GET방식 접근");
+		 
+		 return "redirect:/product/addProductView.jsp"; 
+	 }
+	 @RequestMapping(value="addProduct", method=RequestMethod.POST) 
+	 public String addProduct( @ModelAttribute("product") Product product ) throws Exception {
+		 
+		 System.out.println("addProduct POST방식 접근");
 		 product.setManuDate(product.getManuDate().replace("-", ""));
-		 
-		 System.out.println(product);
+		 //System.out.println(product);
 		 
 		 //Business Logic
 		 productService.addProduct(product);
 		 
 		 return "forward:/product/addProduct.jsp"; 
 	 }
-	  
-	 
-	 @RequestMapping("/listProduct.do") 
+	 //List Mapping
+	 @RequestMapping(value="listProduct", method=RequestMethod.GET) 
 	 public String listProduct( @ModelAttribute("search") Search search , Model model , HttpServletRequest request) throws Exception{
 	 
-		 System.out.println("/listProduct.do");
+		 System.out.println("/listProduct");
 		 
-		 if(search.getCurrentPage() ==0 ){ 
+		 if(search.getCurrentPage() == 0 ){ 
 			 search.setCurrentPage(1); 
 		 }
 		 search.setPageSize(pageSize);
@@ -97,9 +101,10 @@ public class ProductController {
 		 
 		 return "forward:/product/listProduct.jsp"; 
 	 }
-	 @RequestMapping("/getProduct.do") 
+	 // GetProduct Mapping
+	 @RequestMapping(value="getProduct", method=RequestMethod.GET) 
 	 public String getProduct( @RequestParam("prodNo") int prodNo , @CookieValue(value = "history", required = false)Cookie cookie, HttpServletResponse res,Model model ) throws Exception {
-		 System.out.println("/getProduct.do");
+		 System.out.println("getProduct get 방식 접근");
 		 String history = "";
 		 
 		 //cookie
@@ -120,10 +125,12 @@ public class ProductController {
 		 return "forward:/product/getProduct.jsp"; 
 	 }
 	 
-	 @RequestMapping("/updateProductView.do") 
-	 public String updateUserView( @RequestParam("prodNo") int prodNo , Model model ) throws Exception{
+	 //Update Mapping
+	 //@RequestMapping("/updateProductView.do") 
+	 @RequestMapping(value="updateProduct",method=RequestMethod.GET) 
+	 public String updateUser( @RequestParam("prodNo") int prodNo , Model model ) throws Exception{
 		 
-		 System.out.println("/updateProductView.do"); 
+		 System.out.println("updateProduct get 방식 접근"); 
 		 //Business Logic 
 		 Product product = productService.getProduct(prodNo); 
 		 
@@ -133,10 +140,10 @@ public class ProductController {
 		 return "forward:/product/updateProductView.jsp"; 
 	 }
 	  
-	 @RequestMapping("/updateProduct.do") 
+	 @RequestMapping(value="updateProduct",method=RequestMethod.POST) 
 	 public String updateUser( @ModelAttribute("product") Product product , Model model) throws Exception{
 	 
-		 System.out.println("/updateProduct.do"); 
+		 System.out.println("updateProduct POST 방식 접근 => 상품 수정 확인"); 
 
 		 //Business Logic
 		 productService.updateProduct(product);
