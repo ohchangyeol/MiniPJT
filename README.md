@@ -1,0 +1,2 @@
+# MiniPJT
+Sping Mini Project
