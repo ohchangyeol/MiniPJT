@@ -2,6 +2,8 @@ package com.model2.mvc.service.domain;
 
 import java.sql.Date;
 
+import org.springframework.web.multipart.MultipartFile;
+
 
 public class Product {
 	
@@ -21,7 +23,9 @@ public class Product {
 	
 	//setter method
 	public void setProdTranCode(String proTranCode) {this.prodTranCode = proTranCode;}
-	public void setFileName(String fileName) {this.fileName = fileName;}
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
+	}
 	public void setManuDate(String manuDate) {this.manuDate = manuDate;}
 	public void setPrice(int price) {this.price = price;}
 	public void setProdDetail(String prodDetail) {this.prodDetail = prodDetail;}

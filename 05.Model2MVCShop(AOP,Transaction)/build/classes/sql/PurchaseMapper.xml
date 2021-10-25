@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+		PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="PurchaseMapper">
+ 	
+ 	
+	<resultMap id="PurchaseSelectMap" type="purchase">
+		<result property="tranNo" 		column="tran_no" 			jdbcType="NUMERIC"/>
+		<!-- <association property="buyer" javaType ="user">
+			<result property="userId" column="buyer_id" 		jdbcType="VARCHAR" />
+		</association> -->
+		<result property="purchaseProd.prodNo" 	column="prod_no" 	jdbcType="NUMERIC" />
+		<result property="buyer.userId" 	column="buyer_id" 	jdbcType="VARCHAR" />
+		<result property="paymentOption" 	column="payment_option" 	jdbcType="CHAR" />
+		<result property="receiverName" 		column="receiver_name" 				jdbcType="VARCHAR" />
+		<result property="receiverPhone" 		column="receiver_phone" 				jdbcType="VARCHAR" />
+		<result property="divyAddr" 	column="demailaddr" 		jdbcType="VARCHAR" />
+		<result property="divyRequest" 		column="dlvy_request" 			jdbcType="VARCHAR" />
+		<result property="tranCode" 		column="tran_status_code" 			jdbcType="CHAR" />
+		<result property="orderDate" 		column="order_data" 			jdbcType="DATE" />
+		<result property="divyDate" 		column="dlvy_date" 			jdbcType="DATE" />
+	</resultMap>
+	
+	<!-- SQL : INSERT -->
+	
+	<insert 	id="addPurchase"		parameterType="Purchase" >
+	 	INSERT 
+	 	INTO transaction  
+	 	VALUES (seq_transaction_tran_no.NEXTVAL,#{purchaseProd.prodNo}, #{buyer.userId}, #{paymentOption:CHAR}, #{receiverName:VARCHAR}, #{receiverPhone:VARCHAR}, #{divyAddr:VARCHAR}, #{divyRequest:VARCHAR}, #{tranCode:CHAR}, sysdate, #{divyDate:DATE})
+	</insert>
+	
+	
+	
+	
+	
+	 
+	<!-- SQL : SELECT ONE -->
+	 <select 	id="getPurchase"	parameterType="_int"	resultMap="PurchaseSelectMap">
+		SELECT t.* 
+		FROM transaction t, product p 
+		WHERE t.prod_no = p.prod_no 
+		AND t.tran_no = #{value}
+	</select>
+	
+	 <select 	id="getPurchaseProd"	parameterType="_int"	resultMap="PurchaseSelectMap">
+		SELECT t.* 
+		FROM transaction t, product p 
+		WHERE t.prod_no = p.prod_no 
+		AND t.prod_no = #{value}
+	</select>
+	
+	<!--SQL : UPDATE -->
+	<update	id="updatePurchase"	parameterType="purchase" >
+	  	UPDATE transaction
+	  	<set>
+	  		payment_option = #{paymentOption},
+	  		receiver_name = #{receiverName},
+	  		receiver_phone = #{receiverPhone},
+	  		demailaddr = #{divyAddr},
+	  		dlvy_request = #{divyRequest},
+	  		dlvy_date =  #{divyDate}
+	  	</set>
+	  	 WHERE tran_no=#{tranNo}
+	</update>
+	<update	id="updateTranCode"	parameterType="purchase" >
+	  	UPDATE transaction
+	  	<set>
+	  		tran_status_code=#{tranCode}
+	  	</set>
+	  	 WHERE tran_no=#{tranNo}
+	</update>
+	<!-- SQL : SELECT LIST -->
+		
+	<select  id="getPurchaseList"  parameterType="search"	resultMap="PurchaseSelectMap">
+	  	SELECT *
+	  	FROM (	SELECT inner_table.* , ROWNUM AS row_seq
+	  					FROM		(	SELECT t.* FROM transaction t, product p WHERE t.prod_no = p.prod_no  
+										<if test="searchCondition != null">
+											<trim prefix="AND">
+												<if test="searchCondition == 0 and searchKeyword !='' ">
+										 			p.prod_name LIKE '%'|| #{searchKeyword} ||'%'
+												</if>
+												<if test="searchCondition == 1 and searchKeyword !='' ">
+										 			p.prod_no LIKE '%'|| #{searchKeyword}  ||'%'
+												</if>
+											</trim>
+										</if> ORDER BY prod_name ) inner_table
+						WHERE ROWNUM &lt;= #{endRowNum} )
+		WHERE row_seq BETWEEN #{startRowNum} AND #{endRowNum} 
+	 </select>
+	 
+	 <select  id="getSaleList"  parameterType="search"	resultMap="PurchaseSelectMap">
+	  	SELECT *
+	  	FROM (	SELECT inner_table.* , ROWNUM AS row_seq
+	  					FROM		(	SELECT p.* , t.tran_status_code FROM  product p , transaction t WHERE p.prod_no = t.prod_no (+)  
+										<if test="searchCondition != null">
+											<trim prefix="AND">
+												<if test="searchCondition == 0 and searchKeyword !='' ">
+										 			p.prod_name LIKE '%'|| #{searchKeyword} ||'%'
+												</if>
+												<if test="searchCondition == 1 and searchKeyword !='' ">
+										 			p.prod_no LIKE '%'|| #{searchKeyword}  ||'%'
+												</if>
+											</trim>
+										</if> ORDER BY prod_name ) inner_table
+						WHERE ROWNUM &lt;= #{endRowNum} )
+		WHERE row_seq BETWEEN #{startRowNum} AND #{endRowNum} 
+	 </select>
+	 <!--
+	 	 위 두번째 subQuery 의  
+	 			WHERE ROWNUM &lt;= #{endRowNum} ) 는
+	 			WHERE ROWNUM <= #{endRowNum} ) 의미이며..
+	 			< 는 keyword 로 &lt; 를	사용.
+	 			
+	 			<![CDATA[  ~~~  ]]> 를 이용하여 아래와 같이 사용  할 수 있다.
+	 			CDATA ==> Character Data 의 의미 Java 에서 \n 같은 특수문자 처리  
+
+				WHERE ROWNUM <![CDATA[ <=]]> #{endRowNum} )
+		
+	-->
+	
+	<!-- SQL : SELECT ROW Count -->	 
+	 <select  id="getTotalCount"  parameterType="search"	 resultType="int">
+	  	SELECT COUNT(*)
+	  	FROM(	SELECT t.* FROM transaction t, product p WHERE t.prod_no = p.prod_no 
+						<if test="searchCondition != null">
+							<trim prefix="AND">
+								<if test="searchCondition == 0 and searchKeyword !='' ">
+						 			p.prod_name LIKE '%'|| #{searchKeyword} ||'%'
+								</if>
+								<if test="searchCondition == 1 and searchKeyword !='' ">
+						 			p.prod_no LIKE '%'|| #{searchKeyword} ||'%'
+								</if>
+							</trim>
+						</if> ORDER BY prod_name ) countTable						
+	 </select>
+	 
+</mapper>
