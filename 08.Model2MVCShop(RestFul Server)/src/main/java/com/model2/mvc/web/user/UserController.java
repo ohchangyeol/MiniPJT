@@ -32,17 +32,17 @@ public class UserController {
 	@Autowired
 	@Qualifier("userServiceImpl")
 	private UserService userService;
-	//setter Method 구현 않음
-		
-	public UserController(){
-		System.out.println(this.getClass());
-	}
 	
 	@Value("#{commonProperties['pageUnit']}")
 	int pageUnit;
 	@Value("#{commonProperties['pageSize']}")
 	int pageSize;
 	
+	
+	//setter Method 구현 않음
+	public UserController(){
+		System.out.println(this.getClass());
+	}
 	
 	@RequestMapping( value="addUser", method=RequestMethod.GET )
 	public String addUser() throws Exception{

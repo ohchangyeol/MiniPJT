@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -97,23 +98,26 @@ public class UserRestController {
 	//10-21 ====================================
 	
 	@RequestMapping( value="json/checkDuplication", method=RequestMethod.POST )
-	public String checkDuplication( @RequestParam("userId") String userId ) throws Exception{
+	public Map<String, Object> checkDuplication( @RequestBody String userId ) throws Exception{
 		
 		System.out.println("/user/checkDuplication : POST");
 		//Business Logic
+		
+		System.out.println(userId);
 		boolean result=userService.checkDuplication(userId);
 		// Model 과 View 연결
 		
 //		model.addAttribute("result", new Boolean(result));
 //		model.addAttribute("userId", userId);
-
-		return "forward:/user/checkDuplication.jsp";
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("result", new Boolean(result));
+		map.put("userId", new String(userId));
+		return map;
 	}
 
 	
 	@RequestMapping(value= "json/listUser")
 	public Map<String, Object> listUser(@ModelAttribute("search") Search search) throws Exception{
-//	public Model listUser(@ModelAttribute("search") Search search, Model model) throws Exception{
 		
 		System.out.println("/user/listUser : GET / POST");
 		System.out.println("search : "+search);
@@ -123,20 +127,26 @@ public class UserRestController {
 		}
 		search.setPageSize(pageSize);
 		
-		//System.out.println("search : "+search);
 		// Business logic 수행
 		Map<String , Object> map = userService.getUserList(search);
 		
 		Page resultPage = new Page( search.getCurrentPage(), ((Integer)map.get("totalCount")).intValue(), pageUnit, pageSize);
 		System.out.println(resultPage);
-//		model.addAttribute("resultPage", resultPage);
-//		model.addAttribute("search", search);
-//		model.addAttribute("list", map.get("list"));
+		
 		Map<String , Object> returnMap = new HashMap<String, Object>();
 		returnMap.put("resultPage", resultPage);
 		returnMap.put("search", search);
 		returnMap.put("list", map.get("list"));
 		return returnMap;
-//		return model;
+	}
+	
+	@RequestMapping(value= "json/addUser", method = RequestMethod.POST)
+	public User addUser( @RequestBody User user ) throws Exception {
+
+		System.out.println("/user/addUser : POST");
+		//Business Logic
+		userService.addUser(user);
+		
+		return user;
 	}
 }

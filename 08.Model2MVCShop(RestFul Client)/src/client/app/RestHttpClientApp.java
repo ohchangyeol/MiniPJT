@@ -3,6 +3,7 @@ package client.app;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -66,11 +67,14 @@ public class RestHttpClientApp {
 //		System.out.println("\n====================================\n");
 //		RestHttpClientApp.checkDuplication_Codehaus();
 		
-		System.out.println("\n====================================\n");
-		RestHttpClientApp.listUserGet_Codehaus();
+//		System.out.println("\n====================================\n");
+//		RestHttpClientApp.listUserGet_Codehaus();
 		
 //		System.out.println("\n====================================\n");
 //		RestHttpClientApp.listUserPost_Codehaus();
+
+		System.out.println("\n====================================\n");
+		RestHttpClientApp.addUserPost_Codehaus();
 		
 	}
 	
@@ -412,20 +416,17 @@ public class RestHttpClientApp {
 		httpPost.setHeader("Accept", "application/json");
 		httpPost.setHeader("Content-Type", "application/json");
 		
-		User user = new User();
-		user.setUserId("user01");
-		user.setPassword("1111");
-		user.setUserName("유저01");
-		user.setAddr("경기도 양주");
-		user.setPhone("111-2222-3333");
-		
 		ObjectMapper om = new ObjectMapper();
 		
-		String jsonValue = om.writeValueAsString(user);
+//		String exString = "user01";
+		
+//		String jsonValue = om.writeValueAsString("user01");
+		
+//		System.out.println(jsonValue);
 		
 		//System.out.println("==> 바디에 담을 정보 :: "+jsonValue +"\n");
 		
-		HttpEntity entity = new StringEntity(jsonValue,"utf-8");
+		HttpEntity entity = new StringEntity("user01","utf-8");
 		
 		//System.out.println(entity);
 		httpPost.setEntity(entity);
@@ -451,9 +452,8 @@ public class RestHttpClientApp {
 		JSONObject jsonobj = (JSONObject)JSONValue.parse(br);
 		System.out.println(jsonobj);
 	
-		//ObjectMapper objectMapper = new ObjectMapper();
-		user = om.readValue(jsonobj.toString(), User.class);
-		System.out.println(user);
+//		user = om.readValue(jsonobj.toString(), User.class);
+//		System.out.println(user);
 		
 	}
 	
@@ -499,6 +499,7 @@ public class RestHttpClientApp {
 		System.out.println("map \n\n"+ map);
 		
 	}
+	
 	public static void listUserPost_Codehaus() throws Exception{
 		
 		System.out.println("updatePostTest_Codehaus start...");
@@ -561,5 +562,56 @@ public class RestHttpClientApp {
 		System.out.println("map \n\n"+ map);
 //		System.out.println(page);
 //		System.out.println(users);
+	}
+	
+	public static void addUserPost_Codehaus() throws Exception{
+		
+		System.out.println("updatePostTest_Codehaus start...");
+		HttpClient httpClient = new DefaultHttpClient();
+		
+		String url= "http://127.0.0.1:8080/user/json/addUser";
+				
+		// HttpGet : Http Protocol 의 GET 방식 Request
+		HttpPost httpPost = new HttpPost(url);
+		httpPost.setHeader("Accept", "application/json");
+		httpPost.setHeader("Content-Type", "application/json");
+		
+		User user = new User();
+		user.setUserId("testUserId");
+		user.setUserName("testUserName");
+		user.setPassword("testPasswd");
+		user.setSsn("1111112222222");
+		user.setPhone("111-2222-3333");
+		user.setAddr("경기도");
+		user.setEmail("test@test.com");
+		
+	 	ObjectMapper om = new ObjectMapper();
+		
+		String jsonValue = om.writeValueAsString(user);
+		
+		HttpEntity entity = new StringEntity(jsonValue,"utf-8");
+		httpPost.setEntity(entity);
+		
+		// HttpResponse : Http Protocol 응답 Message 추상화
+		HttpResponse httpResponse = httpClient.execute(httpPost);
+		
+		//==> Response 확인
+		System.out.println(httpResponse);
+		System.out.println();
+
+		//==> Response 중 entity(DATA) 확인
+		HttpEntity httpEntity = httpResponse.getEntity();
+//		
+//		//==> InputStream 생성
+		InputStream is = httpEntity.getContent();
+		BufferedReader br = new BufferedReader(new InputStreamReader(is,"UTF-8"));
+		
+		System.out.println("[ Server 에서 받은 Data 확인 ] ");
+		JSONObject jsonobj = (JSONObject)JSONValue.parse(br);
+		
+		//ObjectMapper objectMapper = new ObjectMapper();
+		user = om.readValue(jsonobj.toString(), User.class);
+		
+		System.out.println(user);
 	}
 }

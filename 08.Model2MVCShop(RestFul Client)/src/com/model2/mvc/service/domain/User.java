@@ -93,10 +93,11 @@ public class User {
 	public void setRegDate(Date regDate) {
 		this.regDate = regDate;
 		// JSON ==> Domain Object  Binding을 위해 추가된 부분
-		this.setRegDateString( regDate.toString().split("-")[0]
-												+"-"+ regDate.toString().split("-")[1]
-												+ "-" +regDate.toString().split("-")[2] );
-		
+		if(regDate != null) {
+			this.setRegDateString( regDate.toString().split("-")[0]
+					+"-"+ regDate.toString().split("-")[1]
+							+ "-" +regDate.toString().split("-")[2] );
+		}
 	}
 	
 	/////////////// EL 적용 위해 추가된 getter Method ///////////
