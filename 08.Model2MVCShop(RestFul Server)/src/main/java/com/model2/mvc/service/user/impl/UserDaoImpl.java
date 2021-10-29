@@ -26,7 +26,7 @@ public class UserDaoImpl implements UserDao{
 	
 	///Constructor
 	public UserDaoImpl() {
-		System.out.println(this.getClass());
+		System.out.println("@Repository :: "+this.getClass());
 	}
 
 	///Method

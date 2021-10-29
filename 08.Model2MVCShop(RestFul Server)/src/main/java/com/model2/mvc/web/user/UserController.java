@@ -41,7 +41,7 @@ public class UserController {
 	
 	//setter Method 구현 않음
 	public UserController(){
-		System.out.println(this.getClass());
+		System.out.println("@Controller :: "+this.getClass());
 	}
 	
 	@RequestMapping( value="addUser", method=RequestMethod.GET )

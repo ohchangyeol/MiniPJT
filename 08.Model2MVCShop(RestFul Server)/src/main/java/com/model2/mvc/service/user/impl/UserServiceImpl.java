@@ -28,7 +28,7 @@ public class UserServiceImpl implements UserService{
 	
 	///Constructor
 	public UserServiceImpl() {
-		System.out.println(this.getClass());
+		System.out.println("@Service :: "+this.getClass());
 	}
 
 	///Method
