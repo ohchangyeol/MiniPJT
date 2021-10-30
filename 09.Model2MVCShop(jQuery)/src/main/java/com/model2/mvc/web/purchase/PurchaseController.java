@@ -30,7 +30,7 @@ import com.model2.mvc.service.purchase.PurchaseService;
 //==> 회원관리 Controller
 @Controller
 @RequestMapping("/purchase/*")
-public class PurchaseRestController {
+public class PurchaseController {
 	
 	///Field
 	@Autowired
@@ -48,7 +48,7 @@ public class PurchaseRestController {
 	int pageSize;
 	
 	//Constructor
-	public PurchaseRestController(){
+	public PurchaseController(){
 		System.out.println("@Controller :: "+this.getClass());
 	}
 	
@@ -141,6 +141,8 @@ public class PurchaseRestController {
 		 
 		 // Model 과 View 연결 
 		 //model.addAttribute("purchase",purchase);
+		 
+		 
 		 ModelAndView mv = new ModelAndView();
 		 mv.setViewName("forward:/purchase/getPurchase.jsp");
 		 mv.addObject("purchase",purchase);

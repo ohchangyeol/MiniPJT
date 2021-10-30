@@ -18,14 +18,12 @@
 	<script type="text/javascript">
 	
 		function history(){
-			popWin = window.open("/history.jsp",
-														"popWin",
-														"left=300, top=200, width=300, height=200, marginwidth=0, marginheight=0, scrollbars=no, scrolling=no, menubar=no, resizable=no");
+			popWin = window.open("/history.jsp","popWin","left=300, top=200, width=300, height=200, marginwidth=0, marginheight=0, scrollbars=no, scrolling=no, menubar=no, resizable=no");
 		}
 	
 		//==> jQuery 적용 추가된 부분
 		 $(function() {
-			 
+			 $(".histroy-btn").click(history);
 			//==> 개인정보조회 Event 연결처리부분
 			//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
 		 	$( ".Depth03:contains('개인정보조회')" ).on("click" , function() {
@@ -41,6 +39,30 @@
 				//Debug..
 				//alert(  $( ".Depth03:contains('회원정보조회')" ) );
 		 		$(window.parent.frames["rightFrame"].document.location).attr("href","/user/listUser");
+			}); 
+			
+		 	$( ".Depth03:contains('판매상품등록')" ).on("click" , function() {
+				//Debug..
+				//alert(  $( ".Depth03:contains('회원정보조회')" ) );
+		 		$(window.parent.frames["rightFrame"].document.location).attr("href","/product/addProductView");
+			});
+		 	
+		 	$( ".Depth03:contains('판매상품관리')" ).on("click" , function() {
+				//Debug..
+				//alert(  $( ".Depth03:contains('회원정보조회')" ) );
+		 		$(window.parent.frames["rightFrame"].document.location).attr("href","/product/listProduct?menu=manage");
+			});
+		 	
+		 	$( ".product-list-search" ).on("click" , function() {
+				//Debug..
+				//alert(  $( ".Depth03:contains('회원정보조회')" ) );
+		 		$(window.parent.frames["rightFrame"].document.location).attr("href","/product/listProduct?menu=search");
+			});
+		 	
+		 	$( ".purchase-list" ).on("click" , function() {
+				//Debug..
+				//alert(  $( ".Depth03:contains('회원정보조회')" ) );
+		 		$(window.parent.frames["rightFrame"].document.location).attr("href","/purchase/listPurchase");
 			}); 
 		});	
 		 
@@ -93,12 +115,12 @@
 			<table  border="0" cellspacing="0" cellpadding="0" width="159">
 				<tr>
 					<td class="Depth03">
-						<a href="../product/addProductView.jsp;" target="rightFrame">판매상품등록</a>
+						판매상품등록
 					</td>
 				</tr>
 				<tr>
 					<td class="Depth03">
-						<a href="/listProduct.do?menu=manage"  target="rightFrame">판매상품관리</a>
+						판매상품관리
 					</td>
 				</tr>
 				<tr>
@@ -114,15 +136,15 @@
 	<td valign="top"> 
 		<table  border="0" cellspacing="0" cellpadding="0" width="159">
 			<tr>
-				<td class="Depth03">
-					<a href="/listProduct.do?menu=search" target="rightFrame">상 품 검 색</a>
+				<td class="Depth03 product-list-search">
+					상 품 검 색
 				</td>
 			</tr>
 			
 			<c:if test="${ !empty user && user.role == 'user'}">
 			<tr>
-				<td class="Depth03">
-					<a href="/listPurchase.do"  target="rightFrame">구매이력조회</a>
+				<td class="Depth03 purchase-list">
+					구매이력조회
 				</td>
 			</tr>
 			</c:if>
@@ -131,7 +153,7 @@
 				<td class="DepthEnd">&nbsp;</td>
 			</tr>
 			<tr>
-				<td class="Depth03"><a href="javascript:history()">최근 본 상품</a></td>
+				<td class="Depth03 histroy-btn">최근 본 상품</td>
 			</tr>
 		</table>
 	</td>
