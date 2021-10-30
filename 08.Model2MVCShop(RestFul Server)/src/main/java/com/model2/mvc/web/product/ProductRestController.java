@@ -79,5 +79,36 @@ public class ProductRestController {
 		//Business Logic
 		return productService.getProduct(prodNo);
 	}
+	
+	@RequestMapping(value= "json/addProduct", method = RequestMethod.POST)
+	public Product addUser( @RequestBody Product product ) throws Exception {
 
+		System.out.println("/user/addUser : POST");
+		//Business Logic
+		productService.addProduct(product);
+		
+		return productService.getProduct(productService.getProdNo());
+	}
+	
+	@RequestMapping( value="json/updateProduct/{prodNo}", method=RequestMethod.GET )
+	public Product updateUser( @PathVariable int prodNo ) throws Exception{
+
+		System.out.println("/product/updateProduct : GET");
+
+		System.out.println("prodNo = " +prodNo );
+		//Business Logic
+		return productService.getProduct(prodNo);
+	}
+
+	@RequestMapping( value="json/updateProduct", method=RequestMethod.POST )
+	public Product updateUser1( @RequestBody Product product , HttpSession session) throws Exception{
+
+		System.out.println("/user/updateUser : POST");
+		//Business Logic
+		System.out.println("바인딩 product = " + product);
+		productService.updateProduct(product);
+		System.out.println("업데이트 완료.");
+		
+		return productService.getProduct(product.getProdNo());
+	}
 }

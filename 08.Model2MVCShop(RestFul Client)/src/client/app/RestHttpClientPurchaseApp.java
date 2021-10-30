@@ -25,7 +25,7 @@ import com.model2.mvc.service.domain.User;
 
 
 
-public class RestHttpClientProductApp {
+public class RestHttpClientPurchaseApp {
 	
 	// Main Method
 	public static void main(String[] args) throws Exception{
@@ -46,7 +46,7 @@ public class RestHttpClientProductApp {
 //		RestHttpClientProductApp.updateProduct_Get_Codehaus();
 		
 //		System.out.println("\n====================================\n");
-		RestHttpClientProductApp.updateProduct_Post_Codehaus();
+//		RestHttpClientPurchaseApp.updateProduct_Post_Codehaus();
 
 	}// End of main
 	

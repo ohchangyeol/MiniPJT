@@ -140,5 +140,10 @@ public class ProductServiceTest {
 //	 	
 	 	Integer totalCount = (Integer)map.get("totalCount");
 	 	System.out.println(totalCount);
-	 }	 
+	 }
+	 @Test
+	 public void getProdNo() throws Exception{
+		 int i =productService.getProdNo();
+		 System.out.println(i);
+		 }	 
 }

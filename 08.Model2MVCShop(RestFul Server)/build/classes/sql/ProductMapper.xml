@@ -92,5 +92,8 @@
 							</trim>
 						</if> ORDER BY prod_name ) countTable						
 	 </select> 
-	 
+	 <select id="maxProduct" resultType="int">
+	 	SELECT max(prod_no)
+		FROM product
+	 </select>
 </mapper>

@@ -53,5 +53,9 @@ public class ProductDaoImpl implements ProductDao{
 		return sqlSession.selectOne("ProductMapper.getTotalCount", search);
 	}
 
+	public int getProdNo() throws Exception {
+		return sqlSession.selectOne("ProductMapper.maxProduct");
+	}
+
 	
 }
