@@ -72,7 +72,7 @@ public class ProductController {
 		 
 		 System.out.println("addProduct POST방식 접근");
 		 
-	     
+	     System.out.println("file.getOriginalFilename() :: "+ file.getOriginalFilename() );
 		 if(!file.getOriginalFilename().isEmpty()) {
 			 String root_path = req.getSession().getServletContext().getRealPath("/");  
 		     String attach_path = "images/uploadFiles/";
