@@ -49,7 +49,7 @@ public class ProductController {
 	public ProductController(){
 		System.out.println("@Controller :: "+this.getClass());
 	}
-	/*
+	
 	@RequestMapping("addProductView")
 	public String addProductView() throws Exception {
 		//layout에 이미 jsp 로 연결하도록 만들었기 때문에 언제 실행 될지 잘 모르겠음. 
@@ -57,7 +57,7 @@ public class ProductController {
 		
 		return "redirect:/product/addProductView.jsp";
 	}
-	*/
+	
 	
 	//Add Mapping
 	@RequestMapping(value="addProduct", method=RequestMethod.GET) 
