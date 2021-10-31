@@ -29,10 +29,9 @@
 	<!-- SQL : SELECT ONE -->
 	 <select 	id="getProduct"	parameterType="_int"	resultMap="productSelectMap">
 		SELECT
-		p.prod_no, prod_name, prod_detail, manufacture_day, price, image_file ,reg_date, t.Tran_Status_Code
-		FROM product p, transaction t
-        WHERE p.prod_no = t.prod_no(+)
-		AND p.prod_no = #{value}
+		prod_no, prod_name, prod_detail, manufacture_day, price, image_file ,reg_date	
+		FROM product
+		WHERE prod_no = #{value}
 	</select>
 	
 	<!-- SQL : UPDATE -->
@@ -93,8 +92,5 @@
 							</trim>
 						</if> ORDER BY prod_name ) countTable						
 	 </select> 
-	 <select id="maxProduct" resultType="int">
-	 	SELECT max(prod_no)
-		FROM product
-	 </select>
+	 
 </mapper>

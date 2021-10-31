@@ -62,9 +62,48 @@ $(function() {
 			//Debug..
 			//alert(  $( this ).text().trim() );
 			//console.log($(this).parents(".prod-no")[0]); 
-			console.log($(this).prevAll(".prod-no").val()); 
+			//console.log($(this).prevAll(".prod-no").val()); 
 			var prodNo = $(this).prevAll(".prod-no").val()
-			self.location ="/product/getProduct?prodNo="+prodNo;
+			//self.location ="/product/getProduct?prodNo="+prodNo;
+			$.ajax( 
+					{
+						url : "/product/json/getProduct/"+prodNo,
+						method : "GET" ,
+						dataType : "json" ,
+						headers : {
+							"Accept" : "application/json",
+							"Content-Type" : "application/json"
+						},
+						success : function(JSONData , status) {
+
+							//Debug...
+							//alert(status);
+							//Debug...
+							//alert("JSONData : \n"+JSONData);
+							
+							var displayValue = "<h3>"
+														+"상품번호 : "+JSONData.prodNo+"<br/>"
+														+"상품 명 : "+JSONData.prodName+"<br/>"
+														+"상품이미지 : <img width='150' src='/images/uploadFiles/"+JSONData.fileName+"'><br/>"
+														+"상품상세정보 : "+JSONData.prodDetail+"<br/>"
+														+"제조일자 : "+JSONData.manuDate+"<br/>"
+														+"가 격 : "+JSONData.price+"<br/>"
+														+"등록 일자 : "+JSONData.regDate+"<br/><br/>";
+														
+							if(!JSONData.prodTranCode){
+								console.log("비어있음")
+								//displayValue += "<button onclick='location.href=/purchase/addPurchase?prod_no="+JSONData.prodNo+"'> 구매 </button>";
+								displayValue += "<a href=/purchase/addPurchase?prod_no="+JSONData.prodNo+"> 구매 </a>";
+							}
+							displayValue += '</h3>';
+														
+							//Debug...									
+							//alert(displayValue);
+							$("h3").remove();
+							$( "#"+prodNo+"" ).html(displayValue);
+						}
+				});
+			
 	});
 	
 	//==> UI 수정 추가부분  :  userId LINK Event End User 에게 보일수 있도록 
@@ -284,7 +323,7 @@ $(function() {
 			</td>
 		</tr>
 		<tr>
-			<td colspan="11" bgcolor="D6D7D6" height="1"></td>
+			<td id ="${product.prodNo}"  colspan="11" bgcolor="D6D7D6" height="1"></td>
 		</tr>
 	</c:forEach>
 </table>
