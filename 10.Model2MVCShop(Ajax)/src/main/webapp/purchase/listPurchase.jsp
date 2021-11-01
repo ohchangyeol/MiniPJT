@@ -39,10 +39,79 @@ Page resultPage=(Page)request.getAttribute("resultPage");
         		var tranNo = $(e.currentTarget).attr("value");
         		
         		self.location ="/purchase/getPurchase?tranNo="+tranNo;
+        		 /* $.ajax( 
+    					{
+    						url : "/purchase/getPurchase?tranNo="+tranNo,
+    						method : "GET" ,
+    						dataType : "json" ,
+    						headers : {
+    							"Accept" : "application/json",
+    							"Content-Type" : "application/json"
+    						},
+    						success : function(JSONData , status) {
+    							//Debug...
+    							alert(status);
+    							//Debug...
+    							//alert("JSONData : \n"+JSONData);
+    							//console.log(status);
+    							var displayValue = "<h3>"
+    														+"상품 명 : "+JSONData.purchaseProd.prodName+"<br/>"
+    														+"상품이미지 : <img width='150' src='/images/uploadFiles/"+JSONData.purchaseProd.fileName+"'><br/>"
+    														+"상품상세정보 : "+JSONData.purchaseProd.prodDetail+"<br/>"
+    														+"제조일자 : "+JSONData.purchaseProd.manuDate+"<br/>"
+    														+"가 격 : "+JSONData.purchaseProd.price+"<br/>"
+    														+"등록 일자 : "+JSONData.purchaseProd.regDate+"<br/><br/>";
+    														
+    							if(JSONData.tranCode == '1  '){
+    								//displayValue += "<button onclick='location.href=/purchase/addPurchase?prod_no="+JSONData.prodNo+"'> 구매 </button>";
+    								//displayValue += "<a href=/purchase/addPurchase?prod_no="+JSONData.prodNo+"> 구매 </a>";
+    								displayValue += "<button type='button' onclick = 'location.href=\"/purchase/addPurchase?prod_no="+JSONData.prodNo+"\"'> 구매 </button>";
+    							}
+    							displayValue += '</h3>';
+    														
+    							//Debug...									
+    							//alert(displayValue);
+    							$("h3").remove();
+    							
+    							$( "#"+tranNo+"" ).html(displayValue);
+    						}
+    				}); */ 
         	})
         	
         	$(".getuser-btn").on("click", function(e){
         		self.location ="/user/getUser?userId="+$(this).text().trim();
+        		/* var userId = $(this).text().trim();
+        		console.log("시발왜안돼");
+        		console.log(userId);
+				$.ajax( 
+						{
+							url : "/user/json/getUser/"+userId ,
+							method : "GET" ,
+							dataType : "json" ,
+							headers : {
+								"Accept" : "application/json",
+								"Content-Type" : "application/json"
+							},
+							success : function(JSONData , status) {
+
+								//Debug...
+								alert(status);
+								//Debug...
+								//alert("JSONData : \n"+JSONData);
+								
+								var displayValue = "<h3>"
+															+"아이디 : "+JSONData.userId+"<br/>"
+															+"이  름 : "+JSONData.userName+"<br/>"
+															+"이메일 : "+JSONData.email+"<br/>"
+															+"ROLE : "+JSONData.role+"<br/>"
+															+"등록일 : "+JSONData.regDateString+"<br/>"
+															+"</h3>";
+								//Debug...									
+								//alert(displayValue);
+								$("h3").remove();
+								$( "#"+userId+"" ).html(displayValue);
+							}
+					}); */
         	})
         })
     </script>
@@ -182,7 +251,7 @@ Page resultPage=(Page)request.getAttribute("resultPage");
             </td>
         </tr>
         <tr>
-            <td colspan="11" bgcolor="D6D7D6" height="1"></td>
+            <td colspan="11" bgcolor="D6D7D6" id="${purchase.tranNo}" height="1"></td>
         </tr>
         </c:forEach>
     </table>

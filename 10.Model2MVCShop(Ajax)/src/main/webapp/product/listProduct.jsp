@@ -24,6 +24,7 @@
  --%>
  
  
+ 
 <html>
 <head>
 <c:choose>
@@ -54,7 +55,7 @@ $(function() {
 		fncGetUserList(1);
 	});
 	
-	
+	 
 	//==> userId LINK Event 연결처리
 	//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
 	//==> 3 과 1 방법 조합 : $(".className tagName:filter함수") 사용함.
@@ -63,7 +64,9 @@ $(function() {
 			//alert(  $( this ).text().trim() );
 			//console.log($(this).parents(".prod-no")[0]); 
 			//console.log($(this).prevAll(".prod-no").val()); 
-			var prodNo = $(this).prevAll(".prod-no").val()
+			var prodNo = $(this).prevAll(".prod-no").val();
+			var menu = $("body").data("menu");
+			//console.log(menu);	
 			//self.location ="/product/getProduct?prodNo="+prodNo;
 			$.ajax( 
 					{
@@ -90,16 +93,18 @@ $(function() {
 														+"가 격 : "+JSONData.price+"<br/>"
 														+"등록 일자 : "+JSONData.regDate+"<br/><br/>";
 														
-							if(!JSONData.prodTranCode){
+							if(!JSONData.prodTranCode && menu =="search"){
 								console.log("비어있음")
 								//displayValue += "<button onclick='location.href=/purchase/addPurchase?prod_no="+JSONData.prodNo+"'> 구매 </button>";
-								displayValue += "<a href=/purchase/addPurchase?prod_no="+JSONData.prodNo+"> 구매 </a>";
+								//displayValue += "<a href=/purchase/addPurchase?prod_no="+JSONData.prodNo+"> 구매 </a>";
+								displayValue += "<button type='button' onclick = 'location.href=\"/purchase/addPurchase?prod_no="+JSONData.prodNo+"\"'> 구매 </button>";
 							}
 							displayValue += '</h3>';
 														
 							//Debug...									
 							//alert(displayValue);
 							$("h3").remove();
+							
 							$( "#"+prodNo+"" ).html(displayValue);
 						}
 				});
@@ -143,7 +148,7 @@ $(function() {
 </script>
 </head>
 
-<body bgcolor="#ffffff" text="#000000">
+<body bgcolor="#ffffff" text="#000000" data-menu="${param.menu}">
 
 <div style="width:98%; margin-left:10px;">
 
