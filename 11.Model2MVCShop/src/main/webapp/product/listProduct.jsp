@@ -186,11 +186,11 @@
 		  <div class="col-lg-8">
 		    <div class="product-item-title">
 			    <c:if test="${empty user}">
-			        <span>판매 상품</span>
+			        <span>Product</span>
 			    </c:if>
 		    
 				<c:if test="${param.menu == 'search'}">
-					<span>판매 상품</span>
+					<span>Product</span>
 				</c:if>
 				<c:if test="${param.menu == 'manage'}">
 					<span>판매 상품 관리</span>

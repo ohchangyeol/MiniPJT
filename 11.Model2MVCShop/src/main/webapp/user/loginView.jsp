@@ -49,8 +49,38 @@
 					$("#password").focus();
 					return;
 				}
+				//console.log(typeof id, typeof pw);
 				
-				$("form").attr("method","POST").attr("action","/user/login").attr("target","_parent").submit();
+				//$("form").attr("method","POST").attr("action","/user/login").attr("target","_parent").submit();
+				$.ajax({
+				    url:'/user/json/login', // 요청 할 주소
+				    async:true,// false 일 경우 동기 요청으로 변경
+				    type:'POST', // GET, PUT
+				    headers : {
+						"Accept" : "application/json",
+						"Content-Type" : "application/json"
+					},
+				    data: JSON.stringify({
+				        "userId":id,
+				        "password":pw
+				    }),// 전송할 데이터
+				    dataType:'json',// xml, json, script, html
+				    //beforeSend:function(JSONData) {},// 서버 요청 전 호출 되는 함수 return false; 일 경우 요청 중단
+				    success:function(JSONData) {
+				    	console.log(JSONData);
+				    	if(JSONData.password == pw){
+				    		$("form").attr("method","POST").attr("action","/user/login").attr("target","_parent").submit();
+				    	}else{
+					    	$(".append-box").append("<div class='flash'>잘못된 아이디와 패스워드 입니다.</div>");
+				    	}
+				    	//
+				    },// 요청 완료 시
+				    error:function(JSONData) {
+				    	$(".append-box").append("<div class='flash'>잘못된 아이디와 패스워드 입니다.</div>");
+				    }// 요청 실패.
+				    //complete:function(JSONData) {}// 요청의 실패, 성공과 상관 없이 완료 될 경우 호출
+				});
+				
 			});
 		});	
 		
@@ -75,6 +105,8 @@
     <div class="container">
 
       <h2 class="form-signin-heading">Model2 MVC Shop</h2>
+      <div class="append-box">
+      </div>
       <form class="form-signin">
         <h3 class="form-signin-heading">User Id</h3>
         <label for="inputEmail" class="sr-only">Email address</label>
@@ -83,7 +115,7 @@
         <label for="inputPassword" class="sr-only">Password</label>
         <input type="password" id="password" class="form-control" placeholder="Password" name="password">
         
-        <button class="btn btn-lg btn-success btn-block" type="submit">Sign in</button>
+        <button class="btn btn-lg btn-success btn-block" type="button">Sign in</button>
       </form>
 	  <div class="new-mvc">
 	  	New to MVC Shop? 
