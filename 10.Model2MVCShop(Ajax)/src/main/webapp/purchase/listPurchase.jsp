@@ -34,12 +34,16 @@ Page resultPage=(Page)request.getAttribute("resultPage");
         $(document).ready(function(){
         	//console.log("hello world")
         	$(".tran-btn").on("click", function(e){
-        		console.log($(e.currentTarget).attr("value"));
         		
-        		var tranNo = $(e.currentTarget).attr("value");
+        		console.log($(e.currentTarget).data("value"));
         		
-        		self.location ="/purchase/getPurchase?tranNo="+tranNo;
-        		 /* $.ajax( 
+        		var tranNo = $("#tranNo").data("value");
+        		
+        		//alert("tranNo" + tranNo);
+        		
+        		self.location ="/purchase/getPurchase?tranNo="+tranNo; 
+        		
+        		  /* $.ajax( 
     					{
     						url : "/purchase/getPurchase?tranNo="+tranNo,
     						method : "GET" ,
@@ -50,7 +54,7 @@ Page resultPage=(Page)request.getAttribute("resultPage");
     						},
     						success : function(JSONData , status) {
     							//Debug...
-    							alert(status);
+    							alert("status");
     							//Debug...
     							//alert("JSONData : \n"+JSONData);
     							//console.log(status);
@@ -62,11 +66,11 @@ Page resultPage=(Page)request.getAttribute("resultPage");
     														+"가 격 : "+JSONData.purchaseProd.price+"<br/>"
     														+"등록 일자 : "+JSONData.purchaseProd.regDate+"<br/><br/>";
     														
-    							if(JSONData.tranCode == '1  '){
-    								//displayValue += "<button onclick='location.href=/purchase/addPurchase?prod_no="+JSONData.prodNo+"'> 구매 </button>";
-    								//displayValue += "<a href=/purchase/addPurchase?prod_no="+JSONData.prodNo+"> 구매 </a>";
-    								displayValue += "<button type='button' onclick = 'location.href=\"/purchase/addPurchase?prod_no="+JSONData.prodNo+"\"'> 구매 </button>";
-    							}
+    							// if(JSONData.tranCode == '1  '){
+    							// 	//displayValue += "<button onclick='location.href=/purchase/addPurchase?prod_no="+JSONData.prodNo+"'> 구매 </button>";
+    							// 	//displayValue += "<a href=/purchase/addPurchase?prod_no="+JSONData.prodNo+"> 구매 </a>";
+    							// 	displayValue += "<button type='button' onclick = 'location.href=\"/purchase/addPurchase?prod_no="+JSONData.prodNo+"\"'> 구매 </button>";
+    							// }
     							displayValue += '</h3>';
     														
     							//Debug...									
@@ -75,7 +79,7 @@ Page resultPage=(Page)request.getAttribute("resultPage");
     							
     							$( "#"+tranNo+"" ).html(displayValue);
     						}
-    				}); */ 
+    				});  */
         	})
         	
         	$(".getuser-btn").on("click", function(e){
@@ -95,7 +99,7 @@ Page resultPage=(Page)request.getAttribute("resultPage");
 							success : function(JSONData , status) {
 
 								//Debug...
-								alert(status);
+								//alert(status);
 								//Debug...
 								//alert("JSONData : \n"+JSONData);
 								
@@ -109,7 +113,7 @@ Page resultPage=(Page)request.getAttribute("resultPage");
 								//Debug...									
 								//alert(displayValue);
 								$("h3").remove();
-								$( "#"+userId+"" ).html(displayValue);
+								$( "."+userId+"" ).html(displayValue);
 							}
 					}); */
         	})
@@ -122,6 +126,7 @@ Page resultPage=(Page)request.getAttribute("resultPage");
     <div style="width: 98%; margin-left: 10px;">
     
     <form name="detailForm" action="/purchase/listPurchase" method="post">
+    <!-- <form name="detailForm"> -->
     
     <table width="100%" height="37" border="0" cellpadding="0"	cellspacing="0">
         <tr>
@@ -209,7 +214,7 @@ Page resultPage=(Page)request.getAttribute("resultPage");
         <c:forEach var="purchase" items="${list}">
         	<c:set var="i" value="${ i+1 }" />
 	        <tr class="ct_list_pop">
-            <td align="center" class="tran-btn" value="${purchase.tranNo}">
+            <td align="center" class="tran-btn" id="tranNo" data-value="${purchase.tranNo}">
             	<%-- <c:choose>
 				    <c:when test="${purchase.tranCode == '1  '}">
 				    	<a href="/purchase/getPurchase?tranNo=${purchase.tranNo}">${i}</a>
@@ -251,7 +256,7 @@ Page resultPage=(Page)request.getAttribute("resultPage");
             </td>
         </tr>
         <tr>
-            <td colspan="11" bgcolor="D6D7D6" id="${purchase.tranNo}" height="1"></td>
+            <td colspan="11" bgcolor="D6D7D6" id="${purchase.tranNo} ${purchase.buyer.userId}"height="1"></td>
         </tr>
         </c:forEach>
     </table>

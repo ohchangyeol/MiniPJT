@@ -4,7 +4,7 @@ IMG {
 }
 
 /*전체 가로스크롤 삭제, 스크롤 색상적용*/
-BODY {
+BODY {	
 	scrollbar-3dlight-color: #f8f8f8;
 	scrollbar-highlight-color: #c5c2b2;
 	scrollbar-face-color: #ffffff;

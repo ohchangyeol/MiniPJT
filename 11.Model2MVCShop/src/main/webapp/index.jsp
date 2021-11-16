@@ -7,7 +7,10 @@
 
 <!-- ///////////////////////////// 로그인시 Forward  /////////////////////////////////////// -->
  <c:if test="${ ! empty user }">
- 	<jsp:forward page="main.jsp"/>
+ 	<jsp:forward page="/product/listProduct?menu=search"/>
+ </c:if>
+ <c:if test="${empty user }">
+ 	<jsp:forward page="/product/listProduct"/>
  </c:if>
  <!-- //////////////////////////////////////////////////////////////////////////////////////////////////// -->
 
