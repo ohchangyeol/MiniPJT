@@ -15,21 +15,23 @@
 		<result property="price" 		column="price" 				jdbcType="NUMERIC" />
 		<result property="fileName" 	column="image_file" 		jdbcType="VARCHAR" />
 		<result property="regDate" 		column="reg_date" 			jdbcType="DATE" />
-		<result property="prodTranCode" 	column="tran_status_code" 	jdbcType="CHAR" />
+		<result property="prodTranCode" column="tran_status_code" 	jdbcType="CHAR" />
+		<!-- 수량 -->
+		<result property="prodCount" 	column="prod_count" 		jdbcType="NUMERIC" />
 		
 	</resultMap>
 	
 	<!-- SQL : INSERT -->
 	<insert 	id="addProduct"		parameterType="product" >
 	 	INSERT 
-	 	INTO product (prod_no, prod_name, prod_detail, manufacture_day, price, image_file ,reg_date) 
-	 	VALUES (seq_product_prod_no.NEXTVAL, #{prodName}, #{prodDetail:VARCHAR}, #{manuDate:VARCHAR}, #{price:NUMERIC}, #{fileName:VARCHAR}, SYSDATE)
+	 	INTO product (prod_no, prod_name, prod_detail, manufacture_day, price, image_file ,reg_date, prod_count) 
+	 	VALUES (seq_product_prod_no.NEXTVAL, #{prodName}, #{prodDetail:VARCHAR}, #{manuDate:VARCHAR}, #{price:NUMERIC}, #{fileName:VARCHAR}, SYSDATE, #{prodCount})
 	</insert>
 	 
 	<!-- SQL : SELECT ONE -->
 	 <select 	id="getProduct"	parameterType="_int"	resultMap="productSelectMap">
 		SELECT
-		prod_no, prod_name, prod_detail, manufacture_day, price, image_file ,reg_date	
+		prod_no, prod_name, prod_detail, manufacture_day, price, image_file ,reg_date, prod_count	
 		FROM product
 		WHERE prod_no = #{value}
 	</select>
@@ -42,7 +44,8 @@
 	  		prod_detail = #{prodDetail}, 
 	  		manufacture_day = #{manuDate}, 
 	  		price = #{price}, 
-	  		image_file = #{fileName:VARCHAR}
+	  		image_file = #{fileName:VARCHAR},
+	  		prod_count = #{prodCount:NUMERIC}
 	  	</set>
 	  	WHERE prod_no = #{prodNo}
 	</update>

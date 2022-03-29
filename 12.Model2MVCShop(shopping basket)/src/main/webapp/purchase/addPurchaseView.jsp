@@ -84,6 +84,18 @@
 
 		  $('#divyDate').datepicker(datep);
 			
+		  const prod_count = $("#prodCount").val();
+		  const prod_price = $("#price").val();
+		  $("#tranCount").on("change", function(){
+
+			// console.log("재고 =", prod_count, typeof prod_count , "구매 수량", $(this).val(), typeof $(this).val())
+
+			if(Number(prod_count )< Number($(this).val())){
+				alert("수량이 너무 많습니다");
+				$(this).val(prod_count);
+			}
+			$("#total-price").text(prod_price*Number($(this).val())+"원");
+		  });
 		
 	 });	
 	
@@ -150,7 +162,35 @@
               ${user.userId}
 		    </div>
 		  </div>
+
+		  <!-- 수량 -->
           <div class="form-group">
+		    <label for="prodDetail" class="col-sm-offset-1 col-sm-3 control-label">재고 수량</label>
+		    <div class="col-sm-4 prod-text">
+              <input type="hidden" class="form-control" id="prodCount" name="prodCount" value="${product.prodCount}">
+			  ${product.prodCount}
+		    </div>
+		  </div>
+
+		  <div class="form-group">
+		    <label for="prodDetail" class="col-sm-offset-1 col-sm-3 control-label">구매 수량</label>
+		    <div class="col-sm-4 prod-text">
+				<input type="number" class="form-control" id="tranCount" name="tranCount" value="1" min="1" max="${product.prodCount}">
+		    </div>
+		  </div>
+
+		  <!-- 수량 끝 -->
+
+		  <div class="form-group">
+		    <label for="price" class="col-sm-offset-1 col-sm-3 control-label">총 결제 금액</label>
+		    <div class="col-sm-4 prod-text">
+		    <div id="total-price" class="input-group">
+				${product.price}원
+		    </div> 
+		    </div> 
+		  </div>
+
+		  <div class="form-group">
 		    <label for="paymentOption" class="col-sm-offset-1 col-sm-3 control-label">구매방법</label>
 		    <div class="col-sm-4">
 		      

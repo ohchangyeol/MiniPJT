@@ -83,6 +83,7 @@ public class PurchaseController {
 		 purchase.setBuyer((User)session.getAttribute("user"));
 		 purchase.setTranCode("1");
 		 
+		 purchase.setTotalPrice(product.getPrice()*purchase.getTranCount());
 		 //System.out.println("user :: " + session.getAttribute("user"));
 
 		 //Business Logic

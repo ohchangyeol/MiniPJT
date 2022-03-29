@@ -19,6 +19,8 @@
 		<result property="tranCode" 		column="tran_status_code" 			jdbcType="CHAR" />
 		<result property="orderDate" 		column="order_data" 			jdbcType="DATE" />
 		<result property="divyDate" 		column="dlvy_date" 			jdbcType="DATE" />
+		<result property="tranCount" 		column="tran_count" 			jdbcType="NUMERIC" />
+		<result property="basketCode" 		column="basket_code" 			jdbcType="NUMERIC" />
 		
 		
 		<association property="purchaseProd"  javaType="product">
@@ -30,6 +32,7 @@
 			<result property="fileName" column="image_file" jdbcType="VARCHAR"/>
 			<result property="regDate" column="reg_date" jdbcType="DATE"/>
 			<result property="prodTranCode" column="TRAN_STATUS_CODE" jdbcType="VARCHAR"/>
+			<result property="prodCount" 	column="prod_count" 		jdbcType="NUMERIC" />
 		</association>
 		
 		<association property="buyer"  javaType="user">
@@ -52,7 +55,7 @@
 	<insert 	id="addPurchase"		parameterType="Purchase" >
 	 	INSERT 
 	 	INTO transaction  
-	 	VALUES (seq_transaction_tran_no.NEXTVAL,#{purchaseProd.prodNo}, #{buyer.userId}, #{paymentOption:CHAR}, #{receiverName:VARCHAR}, #{receiverPhone:VARCHAR}, #{divyAddr:VARCHAR}, #{divyRequest:VARCHAR}, #{tranCode:CHAR}, sysdate, #{divyDate:DATE})
+	 	VALUES (seq_transaction_tran_no.NEXTVAL,#{purchaseProd.prodNo}, #{buyer.userId}, #{paymentOption:CHAR}, #{receiverName:VARCHAR}, #{receiverPhone:VARCHAR}, #{divyAddr:VARCHAR}, #{divyRequest:VARCHAR}, #{tranCode:CHAR}, sysdate, #{divyDate:DATE},#{tranCount:NUMERIC} , SEQ_TRANSACTION_BASKET_CODE.NEXTVAL)
 	</insert>
 	
 	

@@ -82,6 +82,7 @@
 							temp +=  "<div class='col-lg-4'>"
 			                    +"<img class='img-circle' src='/images/uploadFiles/"+list[i].fileName+"' data-toggle='tooltip' data-placement='top' title='상품 번호 : "+list[i].prodNo+"<br>상품명 : "+list[i].prodName+"<br>상세 정보 : "+list[i].prodDetail+"<br>제조일자 : "+list[i].regDate+" <br>가격 : "+list[i].price+"원 <br>등록일자 : "+list[i].manuDate+"' width='140' height='140' data-html='true'>"
 			                    +"<h2>"+list[i].prodName+"</h2>"
+								+"<p class ='product-price'> 재고 : "+list[i].prodCount+"</p>"
 			                    +"<p class ='product-price'>"+list[i].price+"원</p>"
 			                    +"<p>"+list[i].prodDetail+"</p>";
 				                   
@@ -217,6 +218,7 @@
 	          <img class="img-circle" src="/images/uploadFiles/${product.fileName}" data-toggle="tooltip" data-placement="top" title="상품 번호 : ${product.prodNo}<br>상품명 : ${product.prodName}<br>상세 정보 : ${product.prodDetail}<br>제조일자 : ${product.regDate} <br>가격 : ${product.price}원 <br>등록일자 : ${product.manuDate}
 	          " width="140" height="140" data-html="true">
 	          <h2>${product.prodName}</h2>
+	          <p class ="product-price">재고 : ${product.prodCount}</p>
 	          <p class ="product-price">${product.price} 원</p>
 	          <p>${product.prodDetail}</p>
 	          <c:if test="${param.menu == 'search'}">

@@ -22,6 +22,13 @@ public class Purchase {
 	// regDate String
 	private String orderDateString;
 	
+	// 구매 수량
+	private int tranCount;
+	// 장바구니 코드
+	private int basketCode;
+	// 총 결제 금액
+	private int totalPrice;
+	
 	public String getOrderDateString() {
 			return orderDateString;
 	}
@@ -62,14 +69,47 @@ public class Purchase {
 	public String getReceiverPhone() {return receiverPhone;}
 	public String getTranCode() {return tranCode;}
 	public int getTranNo() {return tranNo;}
+	
+	
+	public int getTranCount() {
+		return tranCount;
+	}
+
+	public void setTranCount(int tranCount) {
+		this.tranCount = tranCount;
+	}
+
+	
+	public int getBasketCode() {
+		return basketCode;
+	}
+
+	public void setBasketCode(int basketCode) {
+		this.basketCode = basketCode;
+	}
+
+	
+	
+	public int getTotalPrice() {
+		return totalPrice;
+	}
+
+	public void setTotalPrice(int totalPrice) {
+		this.totalPrice = totalPrice;
+	}
+
 	@Override
 	public String toString() {
-		return "PurchaseVO [buyer=" + buyer + ", divyAddr=" + divyAddr
-				+ ", divyDate=" + divyDate + ", divyRequest=" + divyRequest
-				+ ", orderDate=" + orderDate + ", paymentOption="
-				+ paymentOption + ", purchaseProd=" + purchaseProd
-				+ ", receiverName=" + receiverName + ", receiverPhone="
-				+ receiverPhone + ", tranCode=" + tranCode + ", tranNo="
-				+ tranNo + "]";
+		return "Purchase [tranNo=" + tranNo + ", purchaseProd=" + purchaseProd + ", buyer=" + buyer + ", paymentOption="
+				+ paymentOption + ", receiverName=" + receiverName + ", receiverPhone=" + receiverPhone + ", divyAddr="
+				+ divyAddr + ", divyRequest=" + divyRequest + ", tranCode=" + tranCode + ", orderDate=" + orderDate
+				+ ", divyDate=" + divyDate + ", orderDateString=" + orderDateString + ", tranCount=" + tranCount
+				+ ", basketCode=" + basketCode + ", totalPrice=" + totalPrice + "]";
 	}
+
+	
+
+	
+
+	
 }

@@ -88,6 +88,13 @@
 		</div>
 		
 		<hr/>
+
+		<div class="row">
+			<div class="col-xs-4 col-md-2 "><strong>상품 수량</strong></div>
+		  <div class="col-xs-8 col-md-4">${product.prodCount}</div>
+	  </div>
+
+		<hr/>
 		
 		<div class="row">
 	  		<div class="col-xs-4 col-md-2"><strong>상품 상세 정보</strong></div>

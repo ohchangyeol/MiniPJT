@@ -118,6 +118,14 @@
 		    </div> 
 		    </div> 
 		  </div>
+
+		  <div class="form-group">
+		    <label for="manuDate" class="col-sm-offset-1 col-sm-3 control-label">재고 수량</label>
+		    <div class="col-sm-4">
+		      <input type="number" class="form-control" id="prodCount" value="${product.prodCount}" name="prodCount">
+		    </div>
+		  </div>
+
 		  <div class="form-group">
 		    <label for="prodDetail" class="col-sm-offset-1 col-sm-3 control-label">상품 상세 정보</label>
 		    <div class="col-sm-4">

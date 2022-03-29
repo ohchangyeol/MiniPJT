@@ -20,6 +20,9 @@ public class Product {
 	// regDate String
 	private String regDateString;
 	
+	// ¼ö·®
+	private int prodCount;
+	
 	//constructor
 	public Product(){
 	}
@@ -59,10 +62,31 @@ public class Product {
 	public String getRegDateString() {return regDateString;}
 	
 
-	// Override
+	
+	
+	public int getProdCount() {
+		return prodCount;
+	}
+
+
+
+
+	public void setProdCount(int prodCount) {
+		this.prodCount = prodCount;
+	}
+
+
+
+
+	@Override
 	public String toString() {
-		return "ProductVO : [fileName]" + fileName
-				+ "[manuDate]" + manuDate+ "[price]" + price + "[prodDetail]" + prodDetail
-				+ "[prodName]" + prodName + "[prodNo]" + prodNo + "[regDateString]" + regDateString + "[fileName]"+ fileName;
-	}	
+		return "Product [fileName=" + fileName + ", manuDate=" + manuDate + ", price=" + price + ", prodDetail="
+				+ prodDetail + ", prodName=" + prodName + ", prodNo=" + prodNo + ", regDate=" + regDate
+				+ ", prodTranCode=" + prodTranCode + ", regDateString=" + regDateString + ", prodCount=" + prodCount
+				+ "]";
+	}
+
+
+
+
 }
