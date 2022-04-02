@@ -82,13 +82,14 @@
 							temp +=  "<div class='col-lg-4'>"
 			                    +"<img class='img-circle' src='/images/uploadFiles/"+list[i].fileName+"' data-toggle='tooltip' data-placement='top' title='상품 번호 : "+list[i].prodNo+"<br>상품명 : "+list[i].prodName+"<br>상세 정보 : "+list[i].prodDetail+"<br>제조일자 : "+list[i].regDate+" <br>가격 : "+list[i].price+"원 <br>등록일자 : "+list[i].manuDate+"' width='140' height='140' data-html='true'>"
 			                    +"<h2>"+list[i].prodName+"</h2>"
-								+"<p class ='product-price'> 재고 : "+list[i].prodCount+"</p>"
+								+"<p class ='product-price'> 재고 :"+list[i].prodCount+"</p>"
 			                    +"<p class ='product-price'>"+list[i].price+"원</p>"
 			                    +"<p>"+list[i].prodDetail+"</p>";
 				                   
 							if (menu == "search") {
-		                        if( list[i].prodTranCode == null){
-		                        	temp += "<button type='button' class='btn btn-primary' data-prodno='"+list[i].prodNo+"'>Buy &raquo;</button>";
+		                        if( list[i].prodCount != 0){
+		                        	temp += "<button type='button' class='btn btn-primary buy' data-prodno='"+list[i].prodNo+"'>Buy &raquo;</button>"
+									+ "<button type='button' class='btn btn-success put' data-prodno='"+list[i].prodNo+"'>put in &raquo;</button>";
 		                        }else{
 		                        	temp += "<button type='button' class='btn btn-danger'>sold out</button>";
 		                        }
@@ -119,11 +120,12 @@
 		        }
 		     }); 
 			//console.log($(".btn[data-prodno]"));
-			$(document).on("click",".btn[data-prodno]",function(e){
+			$(document).on("click",".buy[data-prodno]",function(e){
 				console.log(this);
 				var btn = $(this);
 				location.href="/purchase/addPurchase?prod_no="+btn.data("prodno");
 			});
+
 		})
  	</script>
 </head>
@@ -222,15 +224,27 @@
 	          <p class ="product-price">${product.price} 원</p>
 	          <p>${product.prodDetail}</p>
 	          <c:if test="${param.menu == 'search'}">
+				  <c:choose>
+					<c:when test="${product.prodCount == 0}">
+						<button type="button" class="btn btn-danger">sold out</button>
+					</c:when>
+
+					<c:otherwise>
+						<button type="button" class="btn btn-primary buy" data-prodno="${product.prodNo}">Buy &raquo;</button>
+						<button type="button" class="btn btn-success put" data-prodno="${product.prodNo}">put in &raquo;</button>
+					</c:otherwise>
+
+				</c:choose>
+				
+				<%-- 
 		        <c:if test="${empty product.prodTranCode }">
-		          	<%-- <p><a class="btn btn-default" href="/purchase/addPurchase?prod_no=${product.prodNo}" role="button">Buy &raquo;</a></p> --%>
 		          	<button type="button" class="btn btn-primary" data-prodno="${product.prodNo}">Buy &raquo;</button>
 	          	</c:if>
 	          	<c:if test="${!empty product.prodTranCode }">
 		          	<button type="button" class="btn btn-danger">sold out</button>
 	          	</c:if>
+				  --%>
 	          </c:if>
-	          
 	          <c:if test="${param.menu == 'manage'}">
 		          <c:if test="${empty product.prodTranCode}">
 		          	<p><a class="btn btn-default" href="/product/updateProduct?prodNo=${product.prodNo}" role="button">Change &raquo;</a></p>

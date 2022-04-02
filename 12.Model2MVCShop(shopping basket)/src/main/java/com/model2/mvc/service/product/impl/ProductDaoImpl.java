@@ -56,6 +56,11 @@ public class ProductDaoImpl implements ProductDao{
 	public int getProdNo() throws Exception {
 		return sqlSession.selectOne("ProductMapper.maxProduct");
 	}
+	
+	// 구매시 수량 감소.
+	public void updateProductCount(Product product) throws Exception {
+		sqlSession.update("ProductMapper.updateProductCount", product);
+	}
 
 	
 }

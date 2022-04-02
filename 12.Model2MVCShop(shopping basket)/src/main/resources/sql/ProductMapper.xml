@@ -99,4 +99,13 @@
 	 	SELECT max(prod_no)
 		FROM product
 	 </select>
+	 
+	 <update id="updateProductCount"	parameterType="product" >
+	 	UPDATE product
+	  	<set>
+	  		prod_count = #{prodCount:NUMERIC}
+	  	</set>
+	  	WHERE prod_no = #{prodNo}
+	 
+	 </update>
 </mapper>

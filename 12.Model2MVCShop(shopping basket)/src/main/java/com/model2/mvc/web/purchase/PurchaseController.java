@@ -85,9 +85,16 @@ public class PurchaseController {
 		 
 		 purchase.setTotalPrice(product.getPrice()*purchase.getTranCount());
 		 //System.out.println("user :: " + session.getAttribute("user"));
-
+		 System.out.println("== 수량 바꾸기 전 ==");
+		 System.out.println(product);
+		 
+		 product.setProdCount(product.getProdCount() -  purchase.getTranCount());
+		 System.out.println("== 수량 바꾼 후 ==");
+		 System.out.println(product);
+		 
+		 
 		 //Business Logic
-		 purchaseService.addPurchase(purchase);
+		 purchaseService.addPurchase(purchase, product);
 		 
 		 //Model And View 연결
 		 ModelAndView modelAndView = new ModelAndView();
