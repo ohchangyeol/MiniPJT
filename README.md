@@ -15,6 +15,8 @@
 - Ajax를 활용하여 무한스크롤 추가,   
 - Ajax를 활용하여 회원가입 유무 체크,  
 - 상품 배송 수락, 배송 정보 확인
+- 상품 수량 구매
+- 장바구니 기능 구현
 
 
 ### Update  history
@@ -55,3 +57,8 @@
 
 - [REFACTORING 11](https://github.com/ohchangyeol/mini-project/tree/main/11.Model2MVCShop)  
     css framework를 사용하여 Presentation 디자인 업데이트
+
+- [REFACTORING 12](https://github.com/ohchangyeol/mini-project/tree/main/12.Model2MVCShop(shopping%20basket))  
+    상품 수량 등록, 수정 기능 추가  
+    상품 수량 구매 기능 추가  
+    장바구니 등록, 부분 삭제, 일괄삭제, 구매 기능 추가

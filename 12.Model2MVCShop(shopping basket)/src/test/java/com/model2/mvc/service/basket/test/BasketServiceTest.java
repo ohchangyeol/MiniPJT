@@ -125,16 +125,7 @@ public class BasketServiceTest {
 		
 		basketService.addBasketList(buyBasket);
 		
-//		for(int i = 0 ; buyBasket.getProdNo().size() > i; i ++) {
-//			System.out.println(buyBasket.getProdNo().get(i) + " : "+i);
-//			for (int j = i ;buyBasket.getProdCount().size() > j ; j ++) {
-//				
-//				if(j == i) {
-//					System.out.println(" j : "+j);
-//				}
-//			}
-//			
-//		}
+
 	}
 	
 	
