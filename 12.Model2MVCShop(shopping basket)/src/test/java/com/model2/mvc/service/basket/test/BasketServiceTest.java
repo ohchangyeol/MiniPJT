@@ -15,6 +15,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import com.model2.mvc.common.Search;
 import com.model2.mvc.service.basket.BasketService;
 import com.model2.mvc.service.domain.Basket;
+import com.model2.mvc.service.domain.BuyBasket;
 import com.model2.mvc.service.domain.Product;
 import com.model2.mvc.service.domain.User;
 import com.model2.mvc.service.user.UserService;
@@ -71,14 +72,33 @@ public class BasketServiceTest {
 		
 		System.out.println("buy Basket start");
 		
+		BuyBasket buyBasket = new BuyBasket();
+		
 		List<String> item = new ArrayList<String>();
 		item.add("10004:1");
 		item.add("10005:3");
 		
 		System.out.println(item);
 		
-		
-		
+		for (String temp : item) {
+			
+			String[] str = temp.split(":");
+			
+			for (int i = 0; i < str.length; i++) {
+				
+				if(i == 0) {
+					buyBasket.getProdNo().add(str[i]);
+					System.out.println(i + " = " + str[i]);
+				}else {
+					buyBasket.getProdCount().add(str[i]);
+					System.out.println(i + " = " + str[i]);
+				}
+				
+			}
+			
+		}
+		System.out.println(buyBasket.getProdNo());
+		System.out.println(buyBasket.getProdCount());
 	}
 	
 	
