@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.model2.mvc.service.basket.BasketDao;
 import com.model2.mvc.service.domain.Basket;
+import com.model2.mvc.service.domain.BuyBasket;
 import com.model2.mvc.service.domain.Product;
 
 
@@ -48,7 +49,10 @@ public class BasketDaoImpl implements BasketDao{
 	}
 	
 	
-	
+	@Override
+	public int addBasketList(BuyBasket buyBasket) throws Exception {
+		return sqlSession.insert("PurchaseMapper.addBasketList", buyBasket);
+	}
 	
 	
 }

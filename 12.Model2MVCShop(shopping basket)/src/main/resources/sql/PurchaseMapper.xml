@@ -58,11 +58,19 @@
 	 	VALUES (seq_transaction_tran_no.NEXTVAL,#{purchaseProd.prodNo}, #{buyer.userId}, #{paymentOption:CHAR}, #{receiverName:VARCHAR}, #{receiverPhone:VARCHAR}, #{divyAddr:VARCHAR}, #{divyRequest:VARCHAR}, #{tranCode:CHAR}, sysdate, #{divyDate:DATE},#{tranCount:NUMERIC} , SEQ_TRANSACTION_BASKET_CODE.NEXTVAL)
 	</insert>
 	
-	
-	
-	
-	
-	 
+	<insert id="addBasketList" parameterType="buyBasket">
+	    INSERT ALL
+	    <foreach collection="prodNo" item="productNo" index="i"  open="" separator=" " close="SELECT * FROM DUAL">
+		    <foreach collection="prodCount" item="productCount" index="j">
+		    <if test="i == j">
+		    INTO transaction
+		    VALUES				 
+		        (fn_get_tran_no ,#{productNo}, #{purchase.buyer.userId}, #{purchase.paymentOption:CHAR}, #{purchase.receiverName:VARCHAR}, #{purchase.receiverPhone:VARCHAR}, #{purchase.divyAddr:VARCHAR}, #{purchase.divyRequest:VARCHAR}, #{purchase.tranCode:CHAR}, sysdate, #{purchase.divyDate:DATE}, #{productCount} , SEQ_TRANSACTION_BASKET_CODE.NEXTVAL)
+		    </if>
+		    </foreach>
+	    </foreach>
+	</insert>
+
 	<!-- SQL : SELECT ONE -->
 	 <select 	id="getPurchase"	parameterType="_int"	resultMap="PurchaseSelectMap">
 		SELECT *

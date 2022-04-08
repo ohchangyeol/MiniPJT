@@ -9,10 +9,10 @@ import org.springframework.stereotype.Service;
 import com.model2.mvc.service.basket.BasketDao;
 import com.model2.mvc.service.basket.BasketService;
 import com.model2.mvc.service.domain.Basket;
+import com.model2.mvc.service.domain.BuyBasket;
 import com.model2.mvc.service.domain.Product;
 
 
-//==> 회원관리 서비스 구현
 @Service("basketServiceImpl")
 public class BasketServiceImpl implements BasketService{
 	
@@ -46,6 +46,11 @@ public class BasketServiceImpl implements BasketService{
 		return basketDao.getBasketList(buyerId);
 	}
 	
+	@Override
+	public int addBasketList(BuyBasket buyBasket) throws Exception {
+		return basketDao.addBasketList(buyBasket);
+	}
+
 	
 	
 
