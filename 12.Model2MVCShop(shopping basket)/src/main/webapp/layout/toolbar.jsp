@@ -85,6 +85,12 @@ function history(){
 		                         <li><a href="#">etc..</a></li>
 		                     </ul>
 		                 </li>
+						<!-- 장바구니 -->
+						 <li class="">
+							<a  href="#" class="cart" role="button" aria-expanded="false">
+								<span >장바구니</span>
+							</a>
+						</li>
 	                 </c:if>
 	                 
 	             </ul>
@@ -156,6 +162,9 @@ function history(){
 			});
 		 	$("a[href='#' ]:contains('Sign in')").on("click" , function() {
 				self.location = "/user/login"
+			});
+			$(".cart").on("click" , function() {
+				window.open('/basket/listBasket','장바구니','width=700,height=800,location=no,status=no,scrollbars=yes');
 			});
 		 });
 		

@@ -126,11 +126,46 @@
 				location.href="/purchase/addPurchase?prod_no="+btn.data("prodno");
 			});
 
+			$(document).on("click", ".put", function(e){
+				// console.log($("body").data("userid"));
+				// console.log($(e.currentTarget).data('prodno'));
+				
+				$.ajax({
+					url : "/basket/json/addBasket/"+$(e.currentTarget).data('prodno'),
+					method : "GET" ,
+					// data:{},
+					dataType : "json" ,
+					headers : {
+						"Accept" : "application/json",
+						"Content-Type" : "application/json"
+					},
+					success : function(JSONtype) {
+
+						// alert("JSON TYPE \n "+JSONtype);
+						if(JSONtype == 400){ // 재고가 없음
+							alert("재고가 없습니다.\n 페이지를 새로고침 합니다.");
+							location.reload();
+						}else if(JSONtype == 100){ // 세션 만료
+							alert("세션이 만료되었습니다.\n 페이지를 새로고침 합니다.");
+							location.reload();
+						}else if(JSONtype == 0){
+							alert("장바구니에 담겨있습니다.");
+						}else{
+							alert(JSONtype +"개의 상품이 장바구니에 담겼습니다.");
+						}
+
+					},
+					error: function(xhr, status, error) {
+						alert(error);
+					}
+				})
+			})
+
 		})
  	</script>
 </head>
 
-<body bgcolor="#ffffff" text="#000000" data-menu="${param.menu}">
+<body bgcolor="#ffffff" text="#000000" data-menu="${param.menu}" data-userid="${user.userId}">
 
 	<jsp:include page="/layout/toolbar.jsp" />
 	

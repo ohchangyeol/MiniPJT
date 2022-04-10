@@ -8,6 +8,16 @@ public class Basket {
 	private int prodNo;
 	private String buyerId;
 	
+	public Basket() {
+	}
+	
+	
+	public Basket(int prodNo, String buyerId) {
+		this.prodNo = prodNo;
+		this.buyerId = buyerId;
+	}
+
+
 	// getter, setter
 	public int getKetNo() {
 		return ketNo;
