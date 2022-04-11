@@ -27,4 +27,6 @@ public interface ProductService {
 	// 상품 이름 중복 확인
 	public boolean checkDuplication(int prodNo) throws Exception;
 	
+	// 구매시 수량 변경
+	public void updateProductCount (Product product) throws Exception;
 }

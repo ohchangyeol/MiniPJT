@@ -27,8 +27,10 @@ public class Product {
 	public Product(){
 	}
 	
-
-	
+	public Product(int prodNo, int prodCount) {
+		this.prodNo = prodNo;
+		this.prodCount = prodCount;
+	}
 
 	//setter method
 	public void setProdTranCode(String proTranCode) {this.prodTranCode = proTranCode;}

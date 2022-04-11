@@ -73,4 +73,12 @@ public class ProductServiceImpl implements ProductService{
 	public int getProdNo() throws Exception {
 		return productDao.getProdNo();
 	}
+	
+	
+	@Override
+	public void updateProductCount(Product product) throws Exception {
+		productDao.updateProductCount(product);
+		
+	}
+	
 }

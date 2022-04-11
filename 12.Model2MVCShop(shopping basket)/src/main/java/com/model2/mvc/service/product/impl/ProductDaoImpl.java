@@ -62,5 +62,4 @@ public class ProductDaoImpl implements ProductDao{
 		sqlSession.update("ProductMapper.updateProductCount", product);
 	}
 
-	
 }

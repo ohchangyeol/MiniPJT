@@ -119,11 +119,19 @@ public class BasketServiceTest {
 			
 		}
 		
+		int count = 0 ;
+		for (String prodNo : buyBasket.getProdNo()) {
+			Product product = new Product(Integer.parseInt(prodNo), Integer.parseInt(buyBasket.getProdCount().get(count)));
+			System.out.println(product);
+			count++;
+		}
+		
+		
 		System.out.println(buyBasket.getProdNo());
 		System.out.println(buyBasket.getProdCount());
 		System.out.println(buyBasket.getPurchase());
 		
-		basketService.addBasketList(buyBasket);
+//		basketService.addBasketList(buyBasket);
 		
 
 	}

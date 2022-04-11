@@ -65,7 +65,7 @@
 		    <if test="i == j">
 		    INTO transaction
 		    VALUES				 
-		        (fn_get_tran_no ,#{productNo}, #{purchase.buyer.userId}, #{purchase.paymentOption:CHAR}, #{purchase.receiverName:VARCHAR}, #{purchase.receiverPhone:VARCHAR}, #{purchase.divyAddr:VARCHAR}, #{purchase.divyRequest:VARCHAR}, #{purchase.tranCode:CHAR}, sysdate, #{purchase.divyDate:DATE}, #{productCount} , SEQ_TRANSACTION_BASKET_CODE.NEXTVAL)
+		        (fn_get_tran_no ,#{productNo}, #{purchase.buyer.userId}, #{purchase.paymentOption:CHAR}, #{purchase.receiverName:VARCHAR}, #{purchase.receiverPhone:VARCHAR}, #{purchase.divyAddr:VARCHAR}, #{purchase.divyRequest:VARCHAR}, 1, sysdate, #{purchase.divyDate:DATE}, #{productCount} , SEQ_TRANSACTION_BASKET_CODE.NEXTVAL)
 		    </if>
 		    </foreach>
 	    </foreach>

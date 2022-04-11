@@ -86,6 +86,8 @@
 			
 		  const prod_count = $("#prodCount").val();
 		  const prod_price = $("#price").val();
+
+		  
 		  $("#tranCount").on("change", function(){
 
 			// console.log("재고 =", prod_count, typeof prod_count , "구매 수량", $(this).val(), typeof $(this).val())

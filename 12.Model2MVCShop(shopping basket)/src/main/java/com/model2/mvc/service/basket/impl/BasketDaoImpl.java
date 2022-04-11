@@ -48,7 +48,6 @@ public class BasketDaoImpl implements BasketDao{
 		return sqlSession.selectList("BasketMapper.getBasketList",buyerId);
 	}
 	
-	
 	@Override
 	public int addBasketList(BuyBasket buyBasket) throws Exception {
 		return sqlSession.insert("PurchaseMapper.addBasketList", buyBasket);

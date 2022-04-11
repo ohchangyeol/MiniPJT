@@ -6,8 +6,8 @@ import java.util.List;
 public class BuyBasket {
 	
 	private Purchase purchase;
-	private List<String> prodNo ;
-	private List<String> prodCount;
+	private List<String> prodNo = new ArrayList<String>();
+	private List<String> prodCount = new ArrayList<String>();
 	
 	
 	
@@ -35,6 +35,14 @@ public class BuyBasket {
 	public void setProdCount(List<String> prodCount) {
 		this.prodCount = prodCount;
 	}
+
+
+	@Override
+	public String toString() {
+		return "BuyBasket [purchase=" + purchase + ", prodNo=" + prodNo + ", prodCount=" + prodCount + "]";
+	}
+	
+	
 	
 	
 	
