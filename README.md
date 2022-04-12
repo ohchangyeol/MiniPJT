@@ -63,6 +63,6 @@
     상품 수량 구매 기능 추가  
     장바구니 등록, 부분 삭제, 일괄삭제, 구매 기능 추가
 
-- [REFACTORING 13]()  *예정*  
+- [REFACTORING 13](https://github.com/ohchangyeol/mini-project/tree/main/13.Model2MVCShop(API)) *구현중*  
     다음 주소 API 추가  
     결제 API 추가 
