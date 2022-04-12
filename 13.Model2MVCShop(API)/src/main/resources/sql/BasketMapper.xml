@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+		PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="BasketMapper">
+ 	
+	
+	<resultMap id="productSelectMap" type="product">
+		<result property="prodNo" 		column="prod_no" 			jdbcType="NUMERIC"/>
+		<result property="prodName"		column="prod_name" 			jdbcType="VARCHAR" />
+		<result property="prodDetail" 	column="prod_detail" 		jdbcType="VARCHAR" />
+		<result property="manuDate" 	column="manufacture_day" 	jdbcType="VARCHAR" />
+		<result property="price" 		column="price" 				jdbcType="NUMERIC" />
+		<result property="fileName" 	column="image_file" 		jdbcType="VARCHAR" />
+		<result property="regDate" 		column="reg_date" 			jdbcType="DATE" />
+		<!-- 수량 -->
+		<result property="prodCount" 	column="prod_count" 		jdbcType="NUMERIC" />
+	</resultMap>
+
+	<resultMap id="basketSelectMap" type="basket">
+		<result property="ketNo" 		column="ket_no" 			jdbcType="NUMERIC"/>
+		<result property="prodNo"		column="prod_no" 			jdbcType="NUMERIC" />
+		<result property="buyerId" 		column="buyer_id" 			jdbcType="VARCHAR" />
+	</resultMap>
+	
+	<!-- SQL : INSERT -->
+	<insert 	id="addBasket"		parameterType="basket" >
+	 	INSERT 
+		INTO BASKET(ket_no, prod_no, buyer_id)
+		SELECT seq_basket_ket_no.NEXTVAL, #{prodNo}, #{buyerId}
+		FROM DUAL
+		WHERE NOT EXISTS (  SELECT 1
+		                    FROM BASKET
+		                    WHERE prod_no = #{prodNo})
+	</insert>
+	
+	<!-- SQL : DELETE -->
+	<delete 	id="deleteBasket"	parameterType="basket">
+		DELETE 
+		FROM basket
+		WHERE buyer_id = #{buyerId}
+		<if test="prodNo != 0 and prodNo != null">
+			<trim prefix="AND">
+				prod_no = #{prodNo}
+			</trim>
+		</if>
+	</delete>
+	
+	<!-- SQL : SELECT -->
+	<select id ="getBasketList" parameterType="string" resultMap="productSelectMap">
+		SELECT p.prod_no, p.prod_name, p.prod_detail, p.prod_count, p.image_file, p.manufacture_day, p.price , p.reg_date
+		FROM basket b LEFT JOIN product p ON b.prod_no = p.prod_no
+		WHERE buyer_id = #{value}
+	</select>
+</mapper>
