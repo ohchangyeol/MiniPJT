@@ -77,7 +77,7 @@
 		
 		<div class="row">
 	  		<div class="col-xs-4 col-md-2 "><strong>ÁÖ¼Ò</strong></div>
-			<div class="col-xs-8 col-md-4">${user.addr}</div>
+			<div class="col-xs-8 col-md-4">${user.addr} <br>${user.addrDetail}</div>
 		</div>
 		
 		<hr/>

@@ -14,6 +14,7 @@ public class User {
 	private String ssn;
 	private String phone;
 	private String addr;
+	private String addrDetail;
 	private String email;
 	private Date regDate;
 	/////////////// EL 적용 위해 추가된 Field ///////////
@@ -77,6 +78,10 @@ public class User {
 		return addr;
 	}
 	public void setAddr(String addr) {
+		if(addr.contains("@")) {
+			addrDetail = addr.split("@")[1];
+			addr = addr.split("@")[0];
+		}
 		this.addr = addr;
 	}
 	public String getEmail() {
@@ -116,7 +121,7 @@ public class User {
 	@Override
 	public String toString() {
 		return "UserVO : [userId] "+userId+" [userName] "+userName+" [password] "+password+" [role] "+ role
-			+" [ssn] "+ssn+" [phone] "+phone+" [email] "+email+" [regDate] "+regDate;
+			+" [ssn] "+ssn+" [phone] "+phone+" [email] "+email+" [regDate] "+regDate + " [addr] " + addr + " [addrDetail] " + addrDetail;
 	}
 	
 	////////////////////////////////////////////////////////////////////////////////////////
@@ -142,4 +147,18 @@ public class User {
 	public void setRegDateString(String regDateString) {
 		this.regDateString = regDateString;
 	}
+
+	
+	public String getAddrDetail() {
+		return addrDetail;
+	}
+
+	public void setAddrDetail(String addrDetail) {
+		if(addrDetail != null) {
+			addr += "@" + addrDetail ;
+		}
+		this.addrDetail = addrDetail;
+	}
+	
+	
 }

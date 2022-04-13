@@ -111,7 +111,11 @@
         
         <div class="row">
             <div class="col-xs-4 col-md-2"><strong>구매자 주소</strong></div>
-            <div class="col-xs-8 col-md-4">${purchase.divyAddr}</div>
+            <div class="col-xs-8 col-md-4">
+				${purchase.divyAddr}
+				<br>
+				${purchase.divyAddrDetail}
+			</div>
         </div>
 		<hr/>
 

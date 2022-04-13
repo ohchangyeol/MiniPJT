@@ -14,6 +14,7 @@ public class Purchase {
 	private String receiverName;
 	private String receiverPhone;
 	private String divyAddr;
+	private String divyAddrDetail;
 	private String divyRequest;
 	private String tranCode;
 	private Date orderDate;
@@ -40,7 +41,13 @@ public class Purchase {
 	public Purchase(){}
 	
 	public void setBuyer(User buyer) {this.buyer = buyer;}
-	public void setDivyAddr(String divyAddr) {this.divyAddr = divyAddr;}
+	public void setDivyAddr(String divyAddr) {
+		if(divyAddr.contains("@")) {
+			divyAddrDetail = divyAddr.split("@")[1];
+			divyAddr = divyAddr.split("@")[0];
+		}
+		this.divyAddr = divyAddr;
+	}
 	public void setDivyDate(String divyDate) {this.divyDate = divyDate;}
 	public void setDivyRequest(String divyRequest) {this.divyRequest = divyRequest;}
 	public void setOrderDate(Date orderDate) {
@@ -98,13 +105,28 @@ public class Purchase {
 		this.totalPrice = totalPrice;
 	}
 
+	
+
 	@Override
 	public String toString() {
 		return "Purchase [tranNo=" + tranNo + ", purchaseProd=" + purchaseProd + ", buyer=" + buyer + ", paymentOption="
 				+ paymentOption + ", receiverName=" + receiverName + ", receiverPhone=" + receiverPhone + ", divyAddr="
-				+ divyAddr + ", divyRequest=" + divyRequest + ", tranCode=" + tranCode + ", orderDate=" + orderDate
-				+ ", divyDate=" + divyDate + ", orderDateString=" + orderDateString + ", tranCount=" + tranCount
-				+ ", basketCode=" + basketCode + ", totalPrice=" + totalPrice + "]";
+				+ divyAddr + ", divyAddrDetail=" + divyAddrDetail + ", divyRequest=" + divyRequest + ", tranCode="
+				+ tranCode + ", orderDate=" + orderDate + ", divyDate=" + divyDate + ", orderDateString="
+				+ orderDateString + ", tranCount=" + tranCount + ", basketCode=" + basketCode + ", totalPrice="
+				+ totalPrice + "]";
+	}
+
+	public String getDivyAddrDetail() {
+		return divyAddrDetail;
+	}
+
+	public void setDivyAddrDetail(String divyAddrDetail) {
+		if(divyAddrDetail != null) {
+			divyAddr += "@" + divyAddrDetail ;
+		}
+		this.divyAddrDetail = divyAddrDetail;
+		
 	}
 
 	

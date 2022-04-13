@@ -222,6 +222,8 @@
 		    <label for="ssn" class="col-sm-offset-1 col-sm-3 control-label">林家</label>
 		    <div class="col-sm-4">
 		      <input type="text" class="form-control" id="addr" name="addr" placeholder="林家">
+			  <br>
+			  <input type="text" class="form-control" id="addrDetail" name="addrDetail" placeholder="惑技林家 ">
 		    </div>
 		  </div>
 		  
@@ -263,6 +265,10 @@
 		
  	</div>
 	<!--  拳搁备己 div end /////////////////////////////////////-->
+
+	<!-- daum API -->
+	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+	<script src="../javascript/daumAPI.js"></script>
 	
 </body>
 

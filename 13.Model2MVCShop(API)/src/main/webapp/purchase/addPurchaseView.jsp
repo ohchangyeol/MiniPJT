@@ -222,6 +222,9 @@
 		    <div class="col-sm-4">
 		      <!-- <input type="text" class="form-control" id="prodDetail" placeholder="상세정보"> -->
               <input type="text" class="form-control" id="divyAddr" name="divyAddr"value="${user.addr}">
+			  <br>
+              <input type="text" class="form-control" id="divyAddrDetail" name="divyAddrDetail"value="${user.addrDetail}">
+
              
 		    </div>
 		  </div>
@@ -251,7 +254,10 @@
 	    
  	</div>
 	<!--  화면구성 div Start /////////////////////////////////////-->
- 	
+	
+ 	<!-- daum API -->
+	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+	<script src="../javascript/daumAPI.js"></script>
 </body>
 
 </html>

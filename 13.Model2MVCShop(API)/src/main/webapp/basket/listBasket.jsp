@@ -393,7 +393,11 @@
 							<td>
 								<label for="divyAddr">аж╪р</label>
 							</td>
-							<td><input type="text"id="divyAddr" name="divyAddr"value="${user.addr}"></td>
+							<td>
+								<input type="text"id="divyAddr" name="divyAddr"value="${user.addr}">
+								<br>
+								<input type="text"id="divyAddrDetail" name="divyAddrDetail"value="${user.addrDetail}">
+							</td>
 						</tr>
 						<tr>
 							<td>
@@ -443,6 +447,11 @@
 			</form>
 		</c:if>
 	</div>
+
+	<!-- daum API -->
+	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+	<script src="../javascript/daumAPI.js"></script>
+	
 </body>
 
 </html>
